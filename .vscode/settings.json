@@ -1,0 +1,13 @@
+{
+  "python.defaultInterpreterPath": "python",
+  "editor.formatOnSave": true,
+  "python.linting.enabled": true,
+  
+  "github.copilot.enable": {
+    "*": true,
+    "python": true
+  },
+  
+  "files.eol": "\n",
+  "files.encoding": "utf8"
+}

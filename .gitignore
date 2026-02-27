@@ -1,0 +1,18 @@
+@'
+# Python
+__pycache__/
+*.pyc
+.env
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+
+# AI 분석 결과
+_analysis.md
+_review.md
+_optimized.md
+
+# Windows
+Thumbs.db
+'@ | Out-File -FilePath ".gitignore" -Encoding UTF8
