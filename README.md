@@ -12,6 +12,11 @@ SSAFY 대비 개인 알고리즘 학습 (2026.02 ~)
 
 ```
 AlgorithmStudy/
+├── .github/
+│   └── workflows/
+│       ├── auto-review.yml       # Push 시 자동 리뷰
+│       ├── daily-summary.yml     # 매일 자정 요약
+│       └── weekly-retrospect.yml # 주간 회고 Issue
 ├── 202602/          # 2026년 2월
 │   ├── 27/          # 2월 27일
 │   │   ├── BOJ_1920.java
@@ -22,12 +27,16 @@ AlgorithmStudy/
 ├── 202603/          # 2026년 3월
 │   ├── 01/
 │   └── ...
+├── summaries/       # 일일 학습 요약
+│   └── 20260227.md
 └── scripts/         # AI 자동화 스크립트
-    ├── init.py      # 오늘 날짜 폴더 생성
-    ├── all.py       # 리뷰 + 최적화 한번에
-    ├── analyze.py   # 문제 분석
-    ├── review.py    # 코드 리뷰
-    └── optimize.py  # 최적화 제안
+    ├── init.py          # 오늘 날짜 폴더 생성
+    ├── all.py           # 리뷰 + 최적화 한번에
+    ├── analyze.py       # 문제 분석
+    ├── review.py        # 코드 리뷰
+    ├── optimize.py      # 최적화 제안
+    ├── daily_summary.py # 일일 요약
+    └── weekly_summary.py # 주간 회고
 ```
 
 ## 🛠️ 사용법
@@ -96,7 +105,38 @@ python scripts/optimize.py 202602/27/BOJ_1920.java
 - Python, Java 등 모든 언어 지원
 - 결과는 같은 폴더에 마크다운으로 저장
 
-## 📝 파일 명명 규칙
+## � GitHub Actions 자동화
+
+### ⚡ Push 시 자동 리뷰
+
+코드를 push하면 GitHub Actions가 자동으로:
+
+1. 변경된 파일 감지
+2. AI 리뷰 + 최적화 실행
+3. `_review.md`, `_optimized.md` 자동 생성 및 커밋
+
+### 📊 매일 자정 학습 요약
+
+매일 자정에 자동으로:
+
+- 오늘 푼 문제들 분석
+- `summaries/YYYYMMDD.md` 생성
+
+### 📈 주간 회고 (일요일)
+
+매주 일요일마다:
+
+- 이번 주 통계 및 회고 생성
+- GitHub Issue로 자동 등록
+
+### 🔑 설정 방법
+
+1. GitHub 레포지토리 → **Settings** → **Secrets and variables** → **Actions**
+2. **New repository secret** 클릭
+3. Name: `GEMINI_API_KEY`, Value: 본인의 API 키
+4. 완료! 이제 push만 하면 자동 실행 🎉
+
+## �📝 파일 명명 규칙
 
 - 백준: `BOJ_문제번호.java` (예: BOJ_1920.java)
 - SWEA: `SWEA_문제번호.java` (예: SWEA_1234.java)

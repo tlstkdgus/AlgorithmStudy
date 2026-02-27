@@ -1,0 +1,49 @@
+name: Weekly Retrospect
+
+on:
+  schedule:
+    - cron: "0 9 * * 0" # 매주 일요일 오후 6시 KST (UTC 9:00)
+  workflow_dispatch: # 수동 실행 가능
+
+jobs:
+  retrospect:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install google-genai
+
+      - name: Generate weekly summary
+        id: summary
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scripts/weekly_summary.py > weekly_summary.md
+
+      - name: Create Issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const summary = fs.readFileSync('weekly_summary.md', 'utf8');
+
+            const date = new Date();
+            const weekNumber = Math.ceil((date - new Date(date.getFullYear(), 0, 1)) / 604800000);
+
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `📊 Week ${weekNumber} 회고 - ${date.toLocaleDateString('ko-KR')}`,
+              body: summary,
+              labels: ['weekly-retrospect']
+            });

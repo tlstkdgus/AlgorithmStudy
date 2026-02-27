@@ -1,18 +1,18 @@
-@'
 # Python
 __pycache__/
 *.pyc
 .env
+.venv/
 
 # VS Code
-.vscode/*
-!.vscode/settings.json
+.vscode/
 
-# AI 분석 결과
-_analysis.md
-_review.md
-_optimized.md
+# AI 임시 파일
+test_*.py
+test_*.java
 
 # Windows
 Thumbs.db
-'@ | Out-File -FilePath ".gitignore" -Encoding UTF8
+
+# macOS
+.DS_Store
