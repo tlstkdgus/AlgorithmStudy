@@ -41,7 +41,23 @@ AlgorithmStudy/
 
 ## 🛠️ 사용법
 
-### 🚀 빠른 시작 (권장)
+### 🚀 빠른 시작 (GitHub Actions 사용 시) ⭐ 권장
+
+```bash
+# 1. 오늘 폴더는 매일 오전 9시 자동 생성됨!
+git pull  # 최신 상태로 동기화
+
+# 2. 문제 풀이 (Java, Python 등)
+# 202602/27/BOJ_1920.java 작성
+
+# 3. 커밋 & 푸시만 하면 끝!
+git add .
+git commit -m "BOJ 1920 풀이"
+git push
+# → 자동으로 리뷰 + 최적화 실행! 🎉
+```
+
+### 🔧 로컬 전용 사용 (GitHub Actions 미사용)
 
 ```bash
 # 1. 오늘 날짜 폴더 생성
@@ -106,7 +122,12 @@ python scripts/optimize.py 202602/27/BOJ_1920.java
 - 결과는 같은 폴더에 마크다운으로 저장
 
 ## � GitHub Actions 자동화
+### 📁 매일 오전 9시 폴더 자동 생성 ⭐ NEW!
 
+매일 오전 9시(KST)에 자동으로:
+- 오늘 날짜 폴더 생성 (예: `202602/28/`)
+- README.md 생성 (오늘 날짜 + 응원 메시지)
+- **폴더 만들 필요 없이 바로 코드 작성 가능!**
 ### ⚡ Push 시 자동 리뷰
 
 코드를 push하면 GitHub Actions가 자동으로:

@@ -1,0 +1,45 @@
+name: Daily Folder Setup
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 매일 오전 9시 KST (UTC 0:00)
+  workflow_dispatch:  # 수동 실행 가능
+
+jobs:
+  create-folder:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Create today's folder
+        run: |
+          python scripts/init.py
+      
+      - name: Create placeholder file
+        run: |
+          TODAY=$(date -u +"%Y%m/%d")
+          if [ -d "$TODAY" ]; then
+            echo "# $(date +%Y년\ %m월\ %d일)" > "$TODAY/README.md"
+            echo "" >> "$TODAY/README.md"
+            echo "오늘도 화이팅! 💪" >> "$TODAY/README.md"
+          fi
+      
+      - name: Commit new folder
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git diff --staged --quiet || git commit -m "📁 Setup: $(date +%Y-%m-%d) 폴더 생성"
+      
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
