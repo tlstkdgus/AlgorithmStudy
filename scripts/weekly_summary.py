@@ -8,15 +8,16 @@ import glob
 
 client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY", ""))
 
-def generate_weekly_summary():
-    today = datetime.now()
+MEMBERS = ["신상현", "김효정", "이원준"]
+
+def generate_weekly_summary_for(member, today):
     week_ago = today - timedelta(days=7)
     
     # 이번 주 푼 문제들 찾기
     all_files = []
     for i in range(7):
         day = week_ago + timedelta(days=i)
-        day_path = f"{day.strftime('%Y%m')}/{day.strftime('%d')}"
+        day_path = f"{member}/{day.strftime('%Y%m')}/{day.strftime('%d')}"
         if os.path.exists(day_path):
             all_files.extend(glob.glob(f"{day_path}/*.py"))
             all_files.extend(glob.glob(f"{day_path}/*.java"))
@@ -24,7 +25,7 @@ def generate_weekly_summary():
             all_files.extend(glob.glob(f"{day_path}/*.js"))
     
     if not all_files:
-        print("이번 주 푼 문제가 없습니다.")
+        print(f"[{member}] 이번 주 푼 문제가 없습니다.")
         return
     
     # 언어별 분류
@@ -64,7 +65,7 @@ def generate_weekly_summary():
 """
     )
     
-    summary = f"""# 📊 Week {today.isocalendar()[1]} 회고
+    summary = f"""# 📊 [{member}] Week {today.isocalendar()[1]} 회고
 
 **기간**: {week_ago.strftime('%Y.%m.%d')} ~ {today.strftime('%Y.%m.%d')}
 
@@ -76,6 +77,19 @@ def generate_weekly_summary():
 """
     
     print(summary)
+    return summary
+
+def generate_weekly_summary():
+    today = datetime.now()
+    all_summaries = []
+    for member in MEMBERS:
+        summary = generate_weekly_summary_for(member, today)
+        if summary is not None:
+            all_summaries.append(summary)
+    
+    if all_summaries:
+        print("\n" + "="*50)
+        print("\n".join(all_summaries))
 
 if __name__ == "__main__":
     generate_weekly_summary()

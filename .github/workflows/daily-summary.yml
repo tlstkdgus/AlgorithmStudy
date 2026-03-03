@@ -31,7 +31,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add summaries/ || true
+          git add 신상현/summaries/ 김효정/summaries/ 이원준/summaries/ || true
           git diff --staged --quiet || git commit -m "📊 Daily Summary: $(date +%Y-%m-%d)"
 
       - name: Push changes

@@ -3,10 +3,18 @@ name: AI Code Review
 on:
   push:
     paths:
-      - "202**/**/*.py"
-      - "202**/**/*.java"
-      - "202**/**/*.cpp"
-      - "202**/**/*.js"
+      - "신상현/202**/**/*.py"
+      - "신상현/202**/**/*.java"
+      - "신상현/202**/**/*.cpp"
+      - "신상현/202**/**/*.js"
+      - "김효정/202**/**/*.py"
+      - "김효정/202**/**/*.java"
+      - "김효정/202**/**/*.cpp"
+      - "김효정/202**/**/*.js"
+      - "이원준/202**/**/*.py"
+      - "이원준/202**/**/*.java"
+      - "이원준/202**/**/*.cpp"
+      - "이원준/202**/**/*.js"
 
 jobs:
   review:
@@ -30,7 +38,7 @@ jobs:
       - name: Get changed files
         id: changed-files
         run: |
-          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep -E '202[0-9]{4}/[0-9]{2}/.*\.(py|java|cpp|js)$' || true)
+          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep -E '^(신상현|김효정|이원준)/202[0-9]{4}/[0-9]{2}/.*\.(py|java|cpp|js)$' || true)
           echo "files<<EOF" >> $GITHUB_OUTPUT
           echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
@@ -53,7 +61,9 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add 202**/**/_review.md 202**/**/_optimized.md || true
+          git add 신상현/202**/**/_review.md 신상현/202**/**/_optimized.md \
+                  김효정/202**/**/_review.md 김효정/202**/**/_optimized.md \
+                  이원준/202**/**/_review.md 이원준/202**/**/_optimized.md || true
           git diff --staged --quiet || git commit -m "🤖 AI Review: Auto-generated code review"
 
       - name: Push changes

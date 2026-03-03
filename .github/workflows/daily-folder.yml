@@ -25,11 +25,14 @@ jobs:
       - name: Create placeholder file
         run: |
           TODAY=$(date -u +"%Y%m/%d")
-          if [ -d "$TODAY" ]; then
-            echo "# $(date +%Y년\ %m월\ %d일)" > "$TODAY/README.md"
-            echo "" >> "$TODAY/README.md"
-            echo "오늘도 화이팅! 💪" >> "$TODAY/README.md"
-          fi
+          for MEMBER in "신상현" "김효정" "이원준"; do
+            MEMBER_TODAY="$MEMBER/$TODAY"
+            if [ -d "$MEMBER_TODAY" ]; then
+              echo "# $(date +%Y년\ %m월\ %d일)" > "$MEMBER_TODAY/README.md"
+              echo "" >> "$MEMBER_TODAY/README.md"
+              echo "오늘도 화이팅! 💪" >> "$MEMBER_TODAY/README.md"
+            fi
+          done
 
       - name: Commit new folder
         run: |
