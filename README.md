@@ -17,14 +17,19 @@ AlgorithmStudy/
 │       ├── auto-review.yml       # Push 시 자동 리뷰
 │       ├── daily-summary.yml     # 매일 자정 요약
 │       └── weekly-retrospect.yml # 주간 회고 Issue
-├── 202602/          # 2026년 2월
-│   └── 27/          # 2월 27일
-│       ├── BOJ_1920.java
-│       ├── _review.md
-│       └── _optimized.md
-├── 202603/          # 2026년 3월
-│   └── 01/
-├── summaries/       # 일일 학습 요약
+├── 신상현/          # 신상현 폴더
+│   ├── 202602/
+│   │   └── 27/
+│   │       ├── BOJ_1920.java
+│   │       ├── _review.md
+│   │       └── _optimized.md
+│   └── summaries/   # 일일 학습 요약
+├── 김효정/          # 김효정 폴더
+│   ├── 202602/
+│   └── summaries/
+├── 이원준/          # 이원준 폴더
+│   ├── 202602/
+│   └── summaries/
 └── scripts/         # AI 자동화 스크립트
     ├── all.py            # 리뷰 + 최적화 한번에 ⭐
     ├── init.py           # 날짜 폴더 생성
@@ -42,8 +47,10 @@ AlgorithmStudy/
 # 1. 오늘 폴더는 매일 오전 9시 자동 생성됨!
 git pull  # 최신 상태로 동기화
 
-# 2. 문제 풀이 (Java, Python 등)
-# 202602/27/BOJ_1920.java 작성
+# 2. 본인 폴더에서 문제 풀이 (Java, Python 등)
+# 신상현/202602/27/BOJ_1920.java 작성
+# 김효정/202602/27/BOJ_1920.java 작성
+# 이원준/202602/27/BOJ_1920.java 작성
 
 # 3. 커밋 & 푸시만 하면 끝!
 git add .
@@ -55,14 +62,14 @@ git push
 ### 🔧 로컬 전용 사용 (GitHub Actions 미사용)
 
 ```bash
-# 1. 오늘 날짜 폴더 생성
+# 1. 오늘 날짜 폴더 생성 (멤버별 자동 생성)
 python scripts/init.py
 
-# 2. 문제 풀이 (Java, Python 등)
-# 202602/27/BOJ_1920.java 작성
+# 2. 본인 폴더에서 문제 풀이
+# 신상현/202602/27/BOJ_1920.java 작성
 
 # 3. 리뷰 + 최적화 한번에 실행
-python scripts/all.py 202602/27/BOJ_1920.java
+python scripts/all.py 신상현/202602/27/BOJ_1920.java
 ```
 
 ### 📚 상세 사용법
@@ -80,11 +87,11 @@ export GEMINI_API_KEY="your_api_key"
 #### 2. 코드 작성 & 분석
 
 ```bash
-# 문제 풀이
-# 202602/27/BOJ_1920.java 작성
+# 본인 폴더에 문제 풀이
+# 신상현/202602/27/BOJ_1920.java 작성
 
 # 리뷰 + 최적화 한번에
-python scripts/all.py 202602/27/BOJ_1920.java
+python scripts/all.py 신상현/202602/27/BOJ_1920.java
 
 # → _review.md, _optimized.md 생성
 ```
@@ -93,10 +100,10 @@ python scripts/all.py 202602/27/BOJ_1920.java
 
 ```bash
 # 리뷰만
-python scripts/review.py 202602/27/BOJ_1920.java
+python scripts/review.py 신상현/202602/27/BOJ_1920.java
 
 # 최적화만
-python scripts/optimize.py 202602/27/BOJ_1920.java
+python scripts/optimize.py 신상현/202602/27/BOJ_1920.java
 ```
 
 ## 🤖 AI 자동화
@@ -112,8 +119,8 @@ python scripts/optimize.py 202602/27/BOJ_1920.java
 
 매일 오전 9시(KST)에 자동으로:
 
-- 오늘 날짜 폴더 생성 (예: `202602/28/`)
-- README.md 생성 (오늘 날짜 + 응원 메시지)
+- 멤버별 오늘 날짜 폴더 생성 (예: `신상현/202602/28/`, `김효정/202602/28/`, `이원준/202602/28/`)
+- 각 폴더에 README.md 생성 (오늘 날짜 + 응원 메시지)
 - **폴더 만들 필요 없이 바로 코드 작성 가능!**
 
 ### ⚡ Push 시 자동 리뷰
@@ -128,8 +135,8 @@ python scripts/optimize.py 202602/27/BOJ_1920.java
 
 매일 자정에 자동으로:
 
-- 오늘 푼 문제들 분석
-- `summaries/YYYYMMDD.md` 생성
+- 멤버별 오늘 푼 문제들 분석
+- `신상현/summaries/YYYYMMDD.md`, `김효정/summaries/YYYYMMDD.md`, `이원준/summaries/YYYYMMDD.md` 생성
 
 ### 📈 주간 회고 (일요일)
 
