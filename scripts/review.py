@@ -32,7 +32,6 @@ def review(file_path):
     print(result)
     
     # 입력 파일과 같은 디렉토리에 저장
-    import os
     file_dir = os.path.dirname(file_path) if os.path.dirname(file_path) else "."
     output_path = os.path.join(file_dir, "_review.md")
     
