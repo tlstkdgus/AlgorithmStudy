@@ -18,6 +18,7 @@ def analyze_all(file_path):
         code = f.read()
     
     file_dir = os.path.dirname(file_path) if os.path.dirname(file_path) else "."
+    file_stem = os.path.splitext(os.path.basename(file_path))[0]
     
     # 1. 코드 리뷰
     print("\n🔬 코드 리뷰 중...")
@@ -40,7 +41,7 @@ def analyze_all(file_path):
     """)
     
     review_result = review_response.text
-    review_path = os.path.join(file_dir, "_review.md")
+    review_path = os.path.join(file_dir, f"{file_stem}_review.md")
     with open(review_path, "w", encoding="utf-8") as f:
         f.write(f"# 코드 리뷰\n\n**파일**: {file_path}\n\n{review_result}")
     print(f"✅ {review_path} 저장 완료")
@@ -66,7 +67,7 @@ def analyze_all(file_path):
     """)
     
     optimize_result = optimize_response.text
-    optimize_path = os.path.join(file_dir, "_optimized.md")
+    optimize_path = os.path.join(file_dir, f"{file_stem}_optimized.md")
     with open(optimize_path, "w", encoding="utf-8") as f:
         f.write(f"# 최적화 분석\n\n{optimize_result}")
     print(f"✅ {optimize_path} 저장 완료")
