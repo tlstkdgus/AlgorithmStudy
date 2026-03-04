@@ -39,7 +39,8 @@ def optimize(file_path):
     
     # 입력 파일과 같은 디렉토리에 저장
     file_dir = os.path.dirname(file_path) if os.path.dirname(file_path) else "."
-    output_path = os.path.join(file_dir, "_optimized.md")
+    file_stem = os.path.splitext(os.path.basename(file_path))[0]
+    output_path = os.path.join(file_dir, f"{file_stem}_optimized.md")
     
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(full_result)

@@ -33,7 +33,8 @@ def review(file_path):
     
     # 입력 파일과 같은 디렉토리에 저장
     file_dir = os.path.dirname(file_path) if os.path.dirname(file_path) else "."
-    output_path = os.path.join(file_dir, "_review.md")
+    file_stem = os.path.splitext(os.path.basename(file_path))[0]
+    output_path = os.path.join(file_dir, f"{file_stem}_review.md")
     
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(f"# 코드 리뷰\n\n**파일**: {file_path}\n\n{result}")
