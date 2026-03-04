@@ -2,6 +2,8 @@ package simulation;
 
 import java.util.Scanner;
 
+// 주사위 굴리기
+
 public class BOJ_14499 {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
