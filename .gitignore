@@ -17,3 +17,12 @@ Thumbs.db
 # macOS
 .DS_Store
 /.metadata/
+
+# Java compiled files
+*.class
+bin/
+
+# Eclipse project files
+.classpath
+.project
+.settings/
